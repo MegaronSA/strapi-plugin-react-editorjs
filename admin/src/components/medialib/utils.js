@@ -37,6 +37,16 @@ export const changeFunc = ({indexStateSetter, editor, data, index}) => {
     insertedBlocksCount++;
   })
 
-  editor.blocks.delete(index + insertedBlocksCount);
+  clearMediaLibBlocks({editor})
   indexStateSetter(-1);
 };
+
+
+export const clearMediaLibBlocks = ({editor}) => {
+  console.log({editor})
+  for(let i = 0; i < editor.blocks.getBlocksCount(); i++) {
+    if(editor.blocks.getBlockByIndex(i).name === "mediaLib") {
+      editor.blocks.delete(i);
+    }
+  }
+}

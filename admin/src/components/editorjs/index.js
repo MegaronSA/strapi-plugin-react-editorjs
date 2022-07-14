@@ -6,7 +6,7 @@ import customTools from '../../config/customTools';
 
 import MediaLibAdapter from '../medialib/adapter'
 import MediaLibComponent from '../medialib/component';
-import {changeFunc, getToggleFunc} from '../medialib/utils';
+import {changeFunc, getToggleFunc, clearMediaLibBlocks} from '../medialib/utils';
 
 const Editor = ({ onChange, name, value }) => {
 
@@ -62,7 +62,10 @@ const Editor = ({ onChange, name, value }) => {
       <MediaLibComponent
         isOpen={isMediaLibOpen}
         onChange={handleMediaLibChange}
-        onToggle={mediaLibToggleFunc}
+        onToggle={(...args) => {
+          clearMediaLibBlocks({editor: editorInstance});
+          return mediaLibToggleFunc(...args);
+        }}
       />
     </>
   );
